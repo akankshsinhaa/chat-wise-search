@@ -35,23 +35,40 @@ export const ChatInterface = () => {
     setIsLoading(true);
 
     try {
-      // Simulate AI response - replace with actual Claude API call
-      setTimeout(() => {
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          content: `I received your message: "${content}". ${webSearchEnabled ? 'I would search the web for current information about this topic.' : 'This is a simulated response.'}`,
-          role: 'assistant',
-          timestamp: new Date(),
-        };
-        setMessages(prev => [...prev, aiResponse]);
-        setIsLoading(false);
-      }, 1500);
+      const { supabase } = await import('@/integrations/supabase/client');
+      
+      const { data, error } = await supabase.functions.invoke('chat-with-claude', {
+        body: { 
+          message: content,
+          webSearchEnabled 
+        }
+      });
+
+      if (error) {
+        throw new Error(error.message || 'Failed to get response');
+      }
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        content: data.reply,
+        role: 'assistant',
+        timestamp: new Date(),
+        hasWebSearch: data.hasWebSearch,
+      };
+
+      setMessages(prev => [...prev, aiResponse]);
     } catch (error) {
+      console.error('Chat error:', error);
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again.",
         variant: "destructive",
       });
+    } finally {
       setIsLoading(false);
     }
   };
