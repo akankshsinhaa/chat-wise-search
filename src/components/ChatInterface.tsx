@@ -82,7 +82,7 @@ export const ChatInterface = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary-hover rounded-full flex items-center justify-center mb-4">
                 <Sparkles className="w-8 h-8 text-primary-foreground" />
               </div>
-              <h2 className="text-2xl font-semibold mb-2">Welcome to Claude Wrapper</h2>
+              <h2 className="text-2xl font-semibold mb-2">Welcome to ZoomRX Project Starter Kit</h2>
               <p className="text-muted-foreground max-w-md">
                 Start a conversation with Claude. Toggle web search to get current information from the internet.
               </p>

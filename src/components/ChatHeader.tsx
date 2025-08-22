@@ -10,7 +10,7 @@ export const ChatHeader = () => {
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold">Claude Wrapper</h1>
+            <h1 className="text-lg font-semibold">ZoomRX Project Starter Kit</h1>
             <p className="text-xs text-muted-foreground">AI Assistant with Web Search</p>
           </div>
         </div>
