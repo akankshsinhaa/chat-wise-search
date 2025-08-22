@@ -48,7 +48,7 @@ export const ChatInput = ({ onSendMessage, isLoading }: ChatInputProps) => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Message Claude..."
+            placeholder="Message ZoomRX AI..."
             className={cn(
               "min-h-[3rem] max-h-32 resize-none rounded-chat-radius",
               "bg-chat-input border-chat-border",
